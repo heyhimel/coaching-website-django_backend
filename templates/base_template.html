@@ -1,0 +1,374 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} Eduspring | academic and University admission programm {% endblock %} </title>
+
+
+    {% block extra_meta %}
+    
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock%}
+  
+  <style>
+    
+
+  @media (min-width: 1400px) {
+    .hero-banner {
+      margin-top: 5%;
+      height: 600px;  /* taller hero on large screens */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-banner {
+      height: 200px;
+    }
+  }
+  .hero-banner .container {
+    width: 100%;
+    height: 100%; /* make container take full height of banner */
+    display: flex;
+    align-items: center;     /* vertical centering */
+    justify-content: flex-start; /* align to the left */
+  }
+
+  /* single course details show upto 3 line*/
+  .line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;    /* show only 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+  .card-img-top {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+  </style>
+  <!-- seo meta data -->
+  <meta name="description" content="Academic and University Admission programs in Science, Humanities, or Commerce | Eduspring | eduspringaac.com">
+  <meta name="keywords" content="University admission, ssc hsc academic program, science batch, humanities, commerce, online registration">
+  <meta name="robots" content="index, follow">
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- Canonical URL (recommended) -->
+  <link rel="canonical" href="https://eduspringaac.com/">
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="{% static 'plugins/slick/slick.css' %}">
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
+  <!-- animation css -->
+  <link rel="stylesheet" href="{% static 'plugins/animate/animate.css' %}">
+  <!-- aos -->
+  <link rel="stylesheet" href="{% static 'plugins/aos/aos.css' %}">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="{% static 'plugins/venobox/venobox.css' %}">
+
+  <!-- Main Stylesheet -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/x-icon">
+
+  <!-- toggler icon -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- social media icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+<!-- header -->
+<header class="fixed-top header">
+  <!-- top header -->
+  <div class="top-header py-2 bg-white">
+    <div class="container">
+      <div class="row no-gutters">
+        <div class="col-lg-4 text-center text-lg-left">
+          <a class="text-color mr-3" href="callto:+880 1713-910641"><strong>CALL</strong> +880 1713-910641</a>
+          <ul class="list-inline d-inline">
+            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="https://www.facebook.com/profile.php?id=61577372205824"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item mx-0">
+              <a class="d-inline-block p-2 text-color" href="https://api.whatsapp.com/send?phone=8801560050146&fbclid=IwY2xjawLgktlleHRuA2FlbQIxMQABHkbwxgrhycUavSxG0dIlTexvj9kbqGpU8gmtPLG297HqHRTMuYWvsfVapRfb_aem_JCDDvsjE63AGZOV2asu5OA">
+                <i class="fab fa-whatsapp"></i>
+              </a>
+            </li>
+            <li class="list-inline-item mx-0"><a class="d-inline-block p-2 text-color" href="#"><i class="ti-youtube icon-big"></i></a></li>
+            
+          </ul>
+        </div>
+        <div class="col-lg-8 text-center text-lg-right">
+          <ul class="list-inline">
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="{%url 'notice_page' %}">notice</a></li>
+            <!-- <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="research.html">research</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="scholarship.html">SCHOLARSHIP</a></li> -->
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#" data-toggle="modal" data-target="#loginModal">login</a></li>
+            <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#" data-toggle="modal" data-target="#signupModal">register</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- navbar -->
+  <div class="w-100">
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light p-0">
+        <a class="navbar-brand " href="{%url 'homepage' %}">
+          <img src="{% static 'images/eduspringaac_logo_final.png'%}" class="img-fluid logo-img" alt="logo">
+        </a>
+        <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
+          aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="bi bi-list fs-1" style="color: #ff9d00;"></i> <!-- Bootstrap Icons -->
+        </button>
+
+        <div class="collapse navbar-collapse" id="navigation">
+          <ul class="navbar-nav ml-auto text-center">
+            <li class="nav-item @@home">
+              <a class="nav-link" href="{% url 'homepage'%}">HOME</a>
+            </li>
+            <li class="nav-item @@courses">
+              <a class="nav-link" href="{% url 'programs_page' %}">PROGRAMS</a>
+            </li>
+            <li class="nav-item dropdown view">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Registration_form
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <a class="dropdown-item" href="{%url 'course_registration_page'%}">Academic & Admission Registration</a>
+                <a class="dropdown-item" href="{% url 'registration_page' %}">Event Registration</a>
+              </div>
+            </li>
+            <li class="nav-item @@blog">
+              <a class="nav-link" href="{%url 'teacher_page'%}">Teachers</a>
+            </li>
+            <li class="nav-item @@contact">
+              <a class="nav-link" href="{% url 'contact_page' %}">CONTACT</a>
+            </li>
+            <li class="nav-item @@about">
+              <a class="nav-link" href="{% url 'about_page' %}">ABOUT US</a>
+            </li>
+            <li class="nav-item dropdown view">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Pages
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{%url 'teacher_page'%}">Teachers</a>
+                <a class="dropdown-item" href="{%url 'notice_page'%}">Notice</a>
+                <a class="dropdown-item" href="{% url 'programs_page' %}">Courses</a>
+                <a class="dropdown-item" href="{%url 'events_page'%}">Events</a>
+                <a class="dropdown-item" href="{%url 'blog_page'%}">Blog Stories</a> 
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- /header -->
+<!-- Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Register</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <form action="#" class="row">
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3" id="signupPhone" name="signupPhone" placeholder="Phone">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control mb-3" id="signupName" name="signupName" placeholder="Name">
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control mb-3" id="signupEmail" name="signupEmail" placeholder="Email">
+                        </div>
+                        <div class="col-12">
+                            <input type="password" class="form-control mb-3" id="signupPassword" name="signupPassword" placeholder="Password">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">SIGN UP</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content rounded-0 border-0 p-4">
+            <div class="modal-header border-0">
+                <h3>Login</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="loginPhone" name="loginPhone" placeholder="Phone">
+                    </div>
+                    <div class="col-12">
+                        <input type="text" class="form-control mb-3" id="loginName" name="loginName" placeholder="Name">
+                    </div>
+                    <div class="col-12">
+                        <input type="password" class="form-control mb-3" id="loginPassword" name="loginPassword" placeholder="Password">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">LOGIN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main>
+    {% block mainbody %}
+    {% endblock %}
+</main>
+
+<!-- footer -->
+<footer>
+  <!-- newsletter -->
+  <div class="newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 ml-auto bg-primary py-5 newsletter-block">
+          <h3 class="text-white">📲 Join With Us & Get Updates</h3>
+          <form action="{%url 'subscribe'%}" method="POST">
+            {% csrf_token %}
+            <div class="input-wrapper">
+              <input type="tel" class="form-control border-0" id="newsletter" name="newsletter" 
+              placeholder="Enter Mobile 01XXXXXXXXX" pattern="01[0-9]{9}" maxlength="11" required>
+              <button type="submit" class="btn btn-primary">Join</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer content -->
+  <div class="footer bg-footer section border-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-8 mb-5 mb-lg-0">
+          <!-- logo -->
+          <a class="logo-footer" href="#"><img src="{% static 'images/eduspringaac_logo_final.png'%}" class="img-fluid logo-img mb-1" alt="logo"></a>
+          <ul class="list-unstyled">
+            <li class="mb-2">N.K Tower, Kathalbagan road, Madhuganj Bazar, Kaliganj, Bangladesh</li>
+            <li class="mb-2">+880 1713-910641</li>
+            <li class="mb-2">+880 1560-050146</li>
+            <li class="mb-2">eduspringaac@gmail.com</li>
+          </ul>
+        </div>
+        <!-- company -->
+        <div class="col-lg-4 col-md-3 col-sm-4 col-6 mb-5 mb-md-0">
+          <h4 class="text-white mb-5">MORE</h4>
+          <ul class="list-unstyled">
+            <li class="mb-3"><a class="text-color" href="{% url 'about_page' %}">About Us</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'teacher_page' %}">Our Teacher</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'contact_page' %}">Contact</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'blog_page' %}">Blogs/Story</a></li>
+            <li class="mb-3"><a class="text-color" href="#">Privacy & Policy</a></li>
+          </ul>
+        </div>
+        <!-- links -->
+        <div class="col-lg-4 col-md-3 col-sm-4 col-6 mb-5 mb-md-0">
+          <h4 class="text-white mb-5">LINKS</h4>
+          <ul class="list-unstyled">
+            <li class="mb-3"><a class="text-color" href="{% url 'registration_page' %}">Event Registration Form</a></li>
+            <li class="mb-3"><a class="text-color" href="{%url 'course_registration_page'%}">Academic & Admission Reg. Form</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'programs_page' %}">Courses</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'notice_page' %}">Notice</a></li>
+            <li class="mb-3"><a class="text-color" href="{% url 'events_page' %}">Events</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- copyright -->
+  <div class="copyright py-4 bg-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-7 text-sm-left text-center">
+          <p class="mb-0">Copyright 
+            © <a href="#">eduspringaac.com</a> Academic & Admission Care.</p> All Rights Reserved.
+            <script>
+              var CurrentYear = new Date().getFullYear()
+              document.write(CurrentYear)
+            </script>
+        </div>
+        <div class="col-sm-5 text-sm-right text-center">
+          <ul class="list-inline">
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="https://www.facebook.com/profile.php?id=61577372205824"><i class="ti-facebook text-primary"></i></a></li>
+            <li class="list-inline-item">
+              <a class="d-inline-block p-2" href="https://api.whatsapp.com/send?phone=8801560050146&fbclid=IwY2xjawLgktlleHRuA2FlbQIxMQABHkbwxgrhycUavSxG0dIlTexvj9kbqGpU8gmtPLG297HqHRTMuYWvsfVapRfb_aem_JCDDvsjE63AGZOV2asu5OA">
+                <i class="fab fa-whatsapp text-primary"></i>
+              </a>
+            </li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="#"><i class="ti-youtube icon-big text-primary"></i></a></li>
+            <li class="list-inline-item"><a class="d-inline-block p-2" href="#"><i class="ti-instagram text-primary"></i></a></li>
+            <li class="list-inline-item mx-0"><a class="d-inline-block p-2" href="#"><i class="ti-linkedin text-primary"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jQuery/jquery.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+<!-- slick slider -->
+<script src="{% static 'plugins/slick/slick.min.js' %}"></script>
+<!-- aos -->
+<script src="{% static 'plugins/aos/aos.js' %}"></script>
+<!-- venobox popup -->
+<script src="{% static 'plugins/venobox/venobox.min.js' %}"></script>
+<!-- mixitup filter -->
+<script src="{% static 'plugins/mixitup/mixitup.min.js' %}"></script>
+<!-- google map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCcABaamniA6OL5YvYSpB3pFMNrXwXnLwU&libraries=places"></script>
+<script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+
+<!-- Main Script -->
+<script src="{% static 'js/script.js' %}"></script>
+{% block extra_js%}
+
+{% endblock %}
+</body>
+</html>

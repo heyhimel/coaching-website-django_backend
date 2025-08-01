@@ -1,0 +1,84 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+
+  {% block title %}Events & Special Classes | EduSpring AAC Coaching Bangladesh{% endblock %}
+  {% block extra_meta %}
+    <meta name="description" content="Join EduSpring AAC's upcoming events: SSC & HSC mock tests, admission seminars, workshops & special classes to help students prepare for success in Bangladesh.">
+    <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC coaching, HSC coaching">
+    <link rel="canonical" href="https://eduspringaac.com/all_events">
+  {% endblock%}
+  {% block extra_css %}
+  <style>
+    .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+  </style>
+  {% endblock%}
+
+{% block mainbody %}
+
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'events_page' %}">Our Events</a></li>
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- courses -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      {%if events %}
+        <!-- event -->
+        {% for event_single in events%}
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="card border-0 rounded-0 hover-shadow">
+            <div class="card-img position-relative">
+              <img class="card-img-top rounded-0" src="{{event_single.event_image.url}}" alt="event thumb">
+              <div class="card-date">{{event_single.event_date_time}}</div>
+            </div>
+            <div class="card-body">
+              <!-- location -->
+              <p><i class="ti-location-pin text-primary mr-2"></i>{{event_single.event_location}}</p>
+              <a href="{% url 'event_single' event_single.id %}">
+                <h4 class="card-title">{{event_single.event_title}}</h4>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- event -->
+        {%endfor%}
+      {%else%}
+      <p>events not found. event will come soon</p>
+      {%endif%}
+      
+    </div>
+  </div>
+</section>
+<!-- /courses -->
+
+{% endblock %}
+
+{% block extra_js%}
+
+  {% endblock %}

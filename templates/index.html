@@ -1,0 +1,581 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}EduSpring Best Admission & Academic Coaching in Bangladesh{% endblock %}
+  {%block extra_meta%}
+  <!-- SEO meta title and description -->
+  <meta name="description" content="EduSpring Academic and Admission Care offers expert coaching for SSC, HSC & university admission. Learn from top teachers & boost your results in Dhaka.">
+
+  <!-- Optional: keywords meta tag (not very important for Google nowadays, but can add) -->
+  <meta name="keywords" content="EduSpring Academic and Admission Care, coaching Bangladesh, admission coaching, SSC coaching, HSC coaching, university admission coaching">
+
+  <!-- Canonical URL (recommended) -->
+  <link rel="canonical" href="https://eduspringaac.com/">
+  {%endblock%}
+  
+  {% block extra_css %}
+    <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Owl Carousel CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  
+  <style>
+  .owl-carousel {
+    height: 800px;
+  }
+    .owl-carousel img {
+  width: 100%;
+  height: 800px;
+  object-fit: contain; /* IMPORTANT: contain fits entire image without cropping */
+  border-radius: 5px;
+  background-color: #ffffff; /* optional: to see empty space if aspect ratio differs */
+  transition: height 0.3s ease; /* smooth height change */
+  
+}
+/* Medium devices (tablets, 768px and below) */
+@media (max-width: 768px) {
+  .owl-carousel {
+    height: 300px;
+  }
+  .owl-carousel img {
+    height: 300px;
+  }
+}
+
+/* Small devices (phones, 480px and below) */
+@media (max-width: 480px) {
+  .owl-carousel {
+    height: 200px;
+  }
+  .owl-carousel img {
+    height: 200px;
+  }
+}
+
+  /* Overlay effect */
+  .owl-carousel .item {
+    position: relative;
+  }
+
+  .owl-carousel .item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1); /* semi-transparent black */
+    border-radius: 10px;
+    transition: background 0.2s ease;
+  }
+
+  .owl-carousel .item:hover .overlay {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-slider-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* Hero content centered over background */
+.hero-content {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center; /* vertically center */
+  justify-content: center; /* horizontally center if needed */
+  z-index: 2;
+  text-align: left; /* or center if you prefer */
+  padding: 0 20px;
+}
+
+/* Make text white and bigger if you like */
+.hero-content h1, .hero-content p {
+  color: white;
+}
+
+/* Base styling for hero text */
+.hero-slider-item h2 {
+  font-size: 3rem;         /* Large screens */
+  font-weight: 700;
+}
+
+.hero-slider-item p {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.hero-slider-item .btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+}
+/* Mid screens: tablets in landscape, small laptops */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .hero-slider-item h2 {
+    font-size: 1.3rem; /* adjust as needed */
+  }
+
+  .hero-slider-item p {
+    font-size: 0.85rem;
+  }
+
+  .hero-slider-item .btn {
+    font-size: 0.5rem;
+    padding: 0.65rem 1.2rem;
+  }
+}
+
+/* Medium devices (tablets, 768px and below) */
+@media (max-width: 768px) {
+  .hero-slider-item h2 {
+    font-size: 1 rem;
+  }
+
+  .hero-slider-item p {
+    font-size: 0.8rem;
+  }
+
+  .hero-slider-item .btn {
+    font-size: 0.45rem;
+    padding: 0.65rem 1.2rem;
+  }
+}
+
+/* Small devices (phones, 480px and below) */
+@media (max-width: 480px) {
+  .hero-slider-item h2 {
+    font-size: 0.75rem;
+  }
+
+  .hero-slider-item p {
+    font-size: 0.4rem;
+  }
+
+  .hero-slider-item .btn {
+    font-size: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+  </style>
+  
+
+{% endblock%}
+
+{% block mainbody %}
+<!-- hero slider -->
+<section class="hero-slider-wrapper position-relative">
+  <!-- Owl Carousel background -->
+  <div class="owl-carousel">
+    {% for banner in banners %}
+      <div class="item">
+        <img class="card-img-top" src="{{ banner.banner_image.url }}" alt="eduspring | banner Image not found">
+        <div class="overlay"></div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Your hero slider content (foreground) -->
+  <div class="container hero-content position-absolute w-100 h-100 d-flex align-items-center">
+    <div class="hero-slider w-100">
+      {% if banner_contents %}
+        {% for content in banner_contents %}
+        <div class="hero-slider-item mb-5">
+          <div class="row">
+            <div class="col-md-8">
+              <h2 class="text-white m-1">{{content.banner_title}}</h2>
+              
+              <p class="text-white mb-4">{{content.banner_message}}</p>
+              <a href="{%url content.target_page_link %}" class="btn btn-primary">Follow Link</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {%else%}
+      <p>content slider is coming</p>
+      {%endif%}
+    </div>
+  </div>
+</section>
+
+
+<!-- programs -->
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center section-title justify-content-between">
+          <h2 class="mb-0 text-nowrap mr-3">Our Programs</h2>
+          <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+          <div>
+            <a href="{% url 'programs_page' %}" class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">see all</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- course list -->
+    <div class="row justify-content-center">
+      <!-- course item -->
+      {% if courses %}
+        {% for single_course in courses %}
+          <div class="col-lg-4 col-sm-6 mb-5">
+            <div class="card p-0 border-primary rounded-0 hover-shadow">
+              {%if single_course.course_image %}
+              <img class="card-img-top rounded-0" src="{{single_course.course_image.url}}" alt="eduspring | courses | programms image not found">
+              {%endif%}
+              <div class="card-body">
+                <ul class="list-inline mb-2">
+                  <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>{{single_course.course_start_at}}</li>
+                  <li class="list-inline-item"><a class="text-color" href="{% url 'single_program' single_course.id %}">{{single_course.course_under_group}}</a></li>
+                </ul>
+                <a href="{% url 'single_program' single_course.id %}">
+                  <h4 class="card-title">{{single_course.course_name_title}}</h4>
+                </a>
+                <p class="card-text mb-4 line-clamp">{{single_course.about_course}}</p>
+                <a href="{%url 'course_registration_page'%}" class="btn btn-primary btn-sm">Apply now</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {%else%}
+      <p>Course is coming</p>
+      {% endif %}
+    </div>
+    <!-- /programs list -->
+    <!-- mobile see all button -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <a href="{% url 'programs_page' %}" class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">sell all</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /programs -->
+
+<!-- success story -->
+{% if latest_story %}
+<section class="section  bg-cover" data-background="{{latest_story.story_background_image.url}}">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-6 col-sm-4 position-relative success-video">
+        <a class="play-btn venobox" href="{{latest_story.story_youtube_video_link}}" data-vbtype="video">
+          <i class="ti-control-play"></i>
+        </a>
+      </div>
+      <div class="col-lg-6 col-sm-8">
+        <div class="bg-white p-5">
+          <h2 class="section-title">Success Stories</h2>
+          <h3 class="section-title">{{latest_story.story_title}}</h3>
+          
+          <!-- Visible short paragraph -->
+          <p>{{latest_story.story_short_message}}</p>
+          
+          <!-- Hidden details paragraph -->
+          <div id="extraContent" style="display: none;">
+            <p>{{latest_story.story_details}}</p>
+          </div>
+          
+          <!-- See more / See less button -->
+          <a href="javascript:void(0);" id="toggleButton" class="btn btn-sm btn-primary mt-2">See more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%else%}
+  <p>story is coming</p>
+{% endif %}
+
+<!-- /success story -->
+
+<!-- blog story -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="d-flex align-items-center section-title justify-content-between">
+          <h2 class="mb-0 text-nowrap mr-3">Our Latest Story</h2>
+          <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+          <div>
+            <a href="{% url 'blog_page' %}" class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">see all</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <!-- blog post -->
+      {%if blog_story %}
+        {% for blog in blog_story %}
+          <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+            <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+              <img class="card-img-top rounded-0" src="{{blog.blog_image.url}}" alt="eduspring | academic | admission blog_image not found">
+              <div class="card-body">
+                <!-- post meta -->
+                <ul class="list-inline mb-3">
+                  <!-- post date -->
+                  <li class="list-inline-item mr-3 ml-0">{{blog.published_date}}</li>
+                  <!-- author -->
+                  <li class="list-inline-item mr-3 ml-0">{{blog.blog_posted_by}}</li>
+                </ul>
+                <a href="{% url 'blog_single' blog.id %}">
+                  <h4 class="card-title">{{blog.blog_title}}</h4>
+                </a>
+                <p class="card-text line-clamp">{{blog.blog_details}}</p>
+                <a href="{% url 'blog_single' blog.id %}" class="btn btn-primary btn-sm">read more</a>
+              </div>
+            </div>
+          </article>
+        {%endfor%}
+      {%else%}
+      <p>story is coming soon, hold on</p>
+      {%endif%}
+      <!-- blog post -->
+    </div>
+    <!-- mobile see all button -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <a href="{% url 'blog_page' %}" class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">sell all</a>
+      </div>
+    </div>
+</div>
+</section>
+<!-- /blog -->
+
+<!-- teachers -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center section-title justify-content-between">
+          <h2 class="mb-0 text-nowrap mr-3">Our Teachers</h2>
+          <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+          <div>
+            <a href="{% url 'teacher_page' %}" class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">see all</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      {%if teachers%}
+        {%for teacher in teachers%}
+        <!-- teacher -->
+        <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+          <div class="card border-0 rounded-0 hover-shadow">
+            {%if teacher%}
+            <img class="card-img-top rounded-0" src="{{teacher.teacher_image.url}}" alt="eduspring | ssc hsc academic & admission | best teacher image not found">
+            {%endif%}
+            <div class="card-body">
+              <a href="{% url 'single_teacher' teacher.id%}">
+                <h4 class="card-title">{{teacher.teacher_name}}</h4>
+              </a>
+              <p>{{teacher.teacher_university_subject}}</p>
+              <p>Taking class in {{teacher.teacher_group}} group</p>
+              <ul class="list-inline">
+                <li class="list-inline-item"><a class="text-color" href="{{teacher.teacher_contact_facebook}}"><i class="ti-facebook"></i></a></li>
+                <li class="list-inline-item"><a class="text-color" href="callto:{{teacher.teacher_contact_mobile}}"><i class="ti-mobile"></i></a></li>
+                <li class="list-inline-item"><a class="text-color" href="mailto:{{teacher.teacher_contact_email}}"><i class="ti-email"></i></a></li>
+                <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-linkedin"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      {%else%}
+      <p>our teacher section is coming asap</p>
+      {%endif%}
+    </div>
+    <div class="row">
+      <div class="col-12 text-center">
+        <a href="{% url 'teacher_page' %}" class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">sell all</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /teachers -->
+
+
+<!-- events -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-flex align-items-center section-title justify-content-between">
+          <h2 class="mb-0 text-nowrap mr-3">Upcoming Events</h2>
+          <div class="border-top w-100 border-primary d-none d-sm-block"></div>
+          <div>
+            <a href="{% url 'events_page' %}" class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">see all</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+  <!-- event -->
+  {%if events%}
+    {% for event in events %}
+      <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+        <div class="card border-0 rounded-0 hover-shadow">
+          <div class="card-img position-relative">
+            <img class="card-img-top rounded-0" src="{{event.event_image.url}}" alt="eduspring | academic & admission coaching best event image not found">
+            <div class="card-date">{{event.event_date_time}}</div>
+          </div>
+          <div class="card-body">
+            <!-- location -->
+            <p><i class="ti-location-pin text-primary mr-2"></i>{{event.event_location}}</p>
+            <a href="{% url 'event_single' event.id %}"><h4 class="card-title">{{event.event_title}}</h4></a>
+          </div>
+        </div>
+      </div>
+    {%endfor%}
+  {%else%}
+  <p>event is not available, soon it will come...</p>
+  {%endif%}
+</div>
+    <!-- mobile see all button -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <a href="{% url 'events_page' %}" class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">sell all</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /events -->
+
+
+<!-- cta -->
+<section class="section bg-primary">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h6 class="text-white font-secondary mb-0">Click to Join the Ongoing Events</h6>
+        <h2 class="section-title text-white">Seminar on Academic & Admission Journey</h2>
+        <a href="{% url 'events_page' %}" class="btn btn-secondary">join now</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /cta -->
+
+<!-- about us -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-6 order-2 order-md-1">
+        <h2 class="section-title">About Eduspring</h2>
+        {% if about_details %}
+        <p>{{about_details.short_content_about_page}}</p>
+        {% endif %}
+        <a href="{% url 'about_page' %}" class="btn btn-primary-outline">Learn more</a>
+      </div>
+      <div class="col-md-6 order-1 order-md-2 mb-4 mb-md-0">
+        {% if about_details %}
+        <img class="img-fluid w-100" src="{{about_details.image_about_page.url}}" alt="about image">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /about us -->
+
+<!-- feature section -->
+<section class="section bg-gray">
+  <div class="container">
+    <div class="row align-items-center">
+      {%if feature%}
+      <!-- left image -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <img class="img-fluid w-100" src="{{ feature.feature_image.url}}" alt="eduspring | ssc academic | university admission | hsc | image not found">
+      </div>
+      {%endif%}
+      <!-- right features -->
+      <div class="col-lg-6">
+        <h2 class="section-title">Our Features</h2>
+        <div class="row">
+          {%if feature%}
+          <div class="col-sm-6 mb-4 text-center text-sm-left">
+            <i class="ti-book mb-3 feature-icon"></i>
+            <h4 class="mb-3">{{feature.feature_name1}}</h4>
+            <p>{{feature.feature_description1}}</p>
+          </div>
+          
+          <div class="col-sm-6 mb-4 text-center text-sm-left">
+            <i class="ti-blackboard mb-3 feature-icon"></i>
+            <h4 class="mb-3">{{feature.feature_name2}}</h4>
+            <p>{{feature.feature_description2}}</p>
+          </div>
+          
+          <div class="col-sm-6 mb-4 text-center text-sm-left">
+            <i class="ti-agenda mb-3 feature-icon"></i>
+            <h4 class="mb-3">{{feature.feature_name3}}</h4>
+            <p>{{feature.feature_description3}}</p>
+          </div>
+          
+          <div class="col-sm-6 mb-4 text-center text-sm-left">
+            <i class="ti-write mb-3 feature-icon"></i>
+            <h4 class="mb-3">{{feature.feature_name4}}</h4>
+            <p>{{feature.feature_description4}}</p>
+          </div>
+          {%else%}
+          <p>our feature page is creating, soon it will come</p>
+          {%endif%}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+<!-- /feature section -->
+
+
+<!-- /banner-feature -->
+
+
+{% endblock %}
+
+{% block extra_js%}
+<!-- jQuery FIRST -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Owl Carousel JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <!-- Initialize -->
+  <script>
+    $(document).ready(function(){
+      $(".owl-carousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 7000,
+        responsive: {
+          0: { items: 1 }
+        }
+      });
+    });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function(){
+    var toggleButton = document.getElementById("toggleButton");
+    var extraContent = document.getElementById("extraContent");
+
+    toggleButton.addEventListener("click", function(){
+      if (extraContent.style.display === "none") {
+        extraContent.style.display = "block";
+        toggleButton.innerText = "See less";
+      } else {
+        extraContent.style.display = "none";
+        toggleButton.innerText = "See more";
+      }
+    });
+  });
+  </script>
+
+  {% endblock %}

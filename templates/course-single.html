@@ -1,0 +1,245 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Individual Program{% endblock %}
+  {% block extra_meta %}
+    <meta name="description" content="Explore EduSpring AAC programs: best programm for SSC, HSC (Science, Humanities, Commerce), and admission prep for medical & engineering universities in Bangladesh.">
+    <meta name="keywords" content="EduSpring Academic and Admission Care, University admission Program, SSC Academic program, HSC Academic program, medical program, engineering program">
+    <link rel="canonical" href="https://eduspringaac.com/single_program">
+  {% endblock%}
+  
+  {% block extra_css %} 
+    <style>
+      .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+      .responsive-thumb {
+    max-width: 100%;          /* ensures it never exceeds container width */
+    height: auto;            /* keeps aspect ratio */
+    object-fit: contain;     /* ensures the whole image is visible */
+    display: block;
+    margin: 0 auto;          /* center the image horizontally */
+    
+    /* Optional: add min dimensions if image is very small */
+    min-width: 200px;        /* adjust based on design */
+    min-height: 150px;
+    }
+
+    .teacher-thumb {
+  width: 60px;            /* adjust size as needed: 40px, 50px, 60px, etc. */
+  height: 60px;
+  object-fit: cover;     /* ensures the image fills the box and keeps aspect ratio */
+  border-radius: 50%;    /* makes it circular (optional, looks nice for profiles) */
+}
+
+
+    </style>
+  {% endblock%}
+
+{% block mainbody %}
+
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'programs_page' %}">Our Courses</a></li>
+          {% if course %}
+          <li class="list-inline-item text-white h3 font-secondary nasted">{{course.course_name_title}}</li>
+          {%endif%}
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- section -->
+<section class="section-sm">
+  {% if course %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-4 text-center">
+        
+        <img src="{{ course.course_image.url }}" class="img-fluid responsive-thumb" alt="Unviersities,medical,engineering admission,ssc hsc academic program">
+        
+      </div>
+    </div>
+
+    <!-- course info -->
+    <div class="row align-items-center mb-5">
+      <div class="col-xl-3 order-1 col-sm-6 mb-4 mb-xl-0">
+        <h3 style="font-size: 27px;">{{course.course_name_title}}</h3>
+      </div>
+      <div class="col-xl-7 order-sm-3 order-xl-2 col-12 order-2">
+        <ul class="list-inline text-xl-center">
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-book text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">COURSES</h6>
+                <p class="mb-0">{{course.course_start_at}}</p>
+                
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-alarm-clock text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">DURATION</h6>
+                <p class="mb-0">{{course.course_approximate_duration_month}} months</p>
+                <p class="mb-0">calss {{course.course_class_duration_hour}} hours</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-4 mb-3 mb-sm-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-wallet text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">FEE</h6>
+                <p class="mb-0">From: Tk {{course.course_fee}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-xl-2 text-sm-right text-left order-sm-2 order-3 order-xl-3 col-sm-6 mb-4 mb-xl-0">
+        <a href="{%url 'course_registration_page'%}" class="btn btn-primary">Apply now</a>
+      </div>
+      <!-- border -->
+      <div class="col-12 mt-4 order-4">
+        <div class="border-bottom border-primary"></div>
+      </div>
+    </div>
+    <!-- course details -->
+    <div class="row">
+      <div class="col-12 mb-4">
+        <h3>About Course</h3>
+        <p>{{course.about_course}}</p>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">Course Highlights</h3>
+        <div class="col-12 px-0">
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-styled">
+                {% for line in course_highlights %}
+                  {% if line %}
+                    <li>{{ line }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mb-4">
+        <h3>Others Info About This Course</h3>
+        <p>{{course.course_others_info}}</p>
+      </div>
+      <div class="col-12 mb-4">
+        <h3 class="mb-3">How to Apply</h3>
+        <ul class="list-styled">
+          <li>Go to registration page => <a href="{%url 'course_registration_page'%}"> click here</a></li>
+          <li>Fill up the form</li>
+          <li>Carefully Choose your course</li>
+          <li>Finally Submit the button</li>
+        </ul>
+      </div>
+      
+  {%endif%}
+      <!-- teacher -->
+      <div class="col-12">
+        <h3 class="mb-4">Teacher Of This Course</h3>
+        {% if teachers %}
+          {% for teacher in teachers %}
+            <div class="mb-4 d-flex justify-content-between align-items-center flex-wrap">
+              <div class="media mb-2 mb-sm-0">
+                <img class="mr-4 img-fluid teacher-thumb" src="{{teacher.teacher_image.url}}" alt="best eduspring Teacher">
+                <div class="media-body">
+                  <a href="{% url 'single_teacher' teacher.id%}">
+                    <h4 class="mt-0">{{teacher.teacher_name}}</h4>
+                    <h6>{{teacher.teacher_university_subject}}, {{teacher.teacher_group}}</h6>
+                  </a>
+                </div>
+              </div>
+              <div class="social-link">
+                <h6 class="d-none d-sm-block">Social Link</h6>
+                <ul class="list-inline">
+                  <li class="list-inline-item"><a class="text-color" href="{{teacher.teacher_contact_facebook}}"><i class="ti-facebook"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="callto:{{teacher.teacher_contact_mobile}}"><i class="ti-mobile"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="mailto:{{teacher.teacher_contact_email}}"><i class="ti-email"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-linkedin"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          {%endfor%}
+        {%endif%}
+        <div class="border-bottom border-primary mt-4"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /section -->
+
+<!-- related course -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h3 class="section-title">Related Course</h3>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <!-- course item -->
+      {% if courses %}
+      <!-- course item -->
+        {%for course in courses%}
+          {% if target_course_id != course.id %}
+          <div class="col-lg-4 col-sm-6 mb-5">
+            <div class="card p-0 border-primary rounded-0 hover-shadow">
+              {%if course.course_image%}
+                <img class="card-img-top rounded-0" src="{{course.course_image.url}}" alt="eduspring course program">
+              {%endif%}
+              <!-- <img class="card-img-top rounded-0" src="{{course.course_image.url}}" alt="course thumb"> -->
+              <div class="card-body">
+                <ul class="list-inline mb-2">
+                  <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>{{course.course_start_at}}</li>
+                  <li class="list-inline-item"><a class="text-color" href="{% url 'single_program' course.id %}">{{course.course_under_group}}</a></li>
+                </ul>
+                <a href="{% url 'single_program' course.id %}">
+                  <h4 class="card-title">{{course.course_name_title}}</h4>
+                </a>
+                <p class="card-text mb-4 line-clamp"> {{course.about_course}}</p>
+                <a href="{%url 'course_registration_page'%}" class="btn btn-primary btn-sm">Apply now</a>
+              </div>
+            </div>
+          </div>
+          {%endif%}
+        {%endfor%}
+      {%else%}
+      <p>course is coming</p>
+      {%endif%}
+    </div>
+  </div>
+</section>
+<!-- /related course -->
+
+{% endblock %}
+
+{% block extra_js%}{% endblock %}

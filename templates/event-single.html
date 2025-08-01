@@ -1,0 +1,205 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Events & Special Classes | EduSpring AAC Coaching Bangladesh{% endblock %}
+  {% block extra_meta %}
+    <meta name="description" content="Join EduSpring AAC's upcoming events: SSC & HSC mock tests, admission seminars, workshops & special classes to help students prepare for success in Bangladesh.">
+    <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC coaching, HSC coaching">
+    <link rel="canonical" href="https://eduspringaac.com/all_events">
+  {% endblock%}
+  
+  {% block extra_css %}
+  <style>
+      .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+.responsive-thumb {
+    max-width: 100%;          /* ensures it never exceeds container width */
+    height: auto;            /* keeps aspect ratio */
+    object-fit: contain;     /* ensures the whole image is visible */
+    display: block;
+    margin: 0 auto;          /* center the image horizontally */
+    
+    /* Optional: add min dimensions if image is very small */
+    min-width: 200px;        /* adjust based on design */
+    min-height: 150px;
+    }
+</style>
+  {% endblock%}
+
+{% block mainbody %}
+
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'events_page' %}">Our Events</a></li>
+          {% if event %}
+          <li class="list-inline-item text-white h3 font-secondary nasted">{{event.event_title}}</li>
+          {%endif%}
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- event single -->
+<section class="section-sm">
+  <div class="container">
+    {% if event %}
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">{{.event_title}}</h2>
+      </div>
+      <!-- event image -->
+      <div class="col-12 mb-4">
+        <img src="{{event.event_image.url}}" alt="event thumb" class="img-fluid responsive-thumb">
+      </div>
+    </div>
+    <!-- event info -->
+    <div class="row align-items-center mb-5">
+      <div class="col-lg-9">
+        <ul class="list-inline">
+          <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-location-pin text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">LOCATION</h6>
+                <p class="mb-0">{{event.event_location}}</p>
+              </div>
+            </div>
+          </li>
+          <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-calendar text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">DATE & TIME</h6>
+                <p class="mb-0">{{event.event_date_time}}</p>
+              </div>
+            </div>
+          </li>
+          <!-- <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-time text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">TIME</h6>
+                <p class="mb-0">04: 00 pm</p>
+              </div>
+            </div>
+          </li> -->
+          <li class="list-inline-item mr-xl-5 mr-4 mb-3 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <i class="ti-wallet text-primary icon-md mr-2"></i>
+              <div class="text-left">
+                <h6 class="mb-0">DELIVERABLE</h6>
+                <p class="mb-0">{{event.event_deliverable}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 text-lg-right text-left">
+        <a href="{%url 'registration_page'%}" class="btn btn-primary">Apply now</a>
+      </div>
+      <!-- border -->
+      <div class="col-12 mt-4 order-4">
+        <div class="border-bottom border-primary"></div>
+      </div>
+    </div>
+    <!-- event details -->
+    <div class="row">
+      <div class="col-12 mb-50">
+        <h3>About Event</h3>
+        <p>{{event.write_about_event}}</p>
+      </div>
+    </div>
+    <!-- event speakers -->
+    <div class="row">
+      <div class="col-12">
+        <h3 class="mb-4">Event Speakers</h3>
+      </div>
+      <!-- speakers -->
+      {% if speakers %}
+        {% for speaker in speakers %}
+          <div class="col-lg-3 col-sm-6 mb-4 mb-lg-0">
+            <div class="media">
+              <img class="mr-3 img-fluid" src="{{speaker.speaker_photo.url}}" alt="speaker">
+              <div class="media-body">
+                <h4 class="mt-0">{{speaker.speaker_name}}</h4>
+                {{speaker.speaker_designation}}
+              </div>
+            </div>
+          </div>
+        {%endfor%}
+      {%else%}
+      <p>speaker will be available soon</p>
+      {%endif%}
+      <!-- border -->
+      <div class="col-12 mt-4 order-4">
+        <div class="border-bottom border-primary"></div>
+      </div>
+    </div>
+    {%endif%}
+  </div>
+</section>
+<!-- /event single -->
+
+<!-- more event -->
+<section class="section pt-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">More Events</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <!-- event -->
+      {%if events%}
+        {% for single_event in events %}
+          {% if single_event.id != event.id %}
+            <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+              <div class="card border-0 rounded-0 hover-shadow">
+                <div class="card-img position-relative">
+                  <img class="card-img-top rounded-0" src="{{single_event.event_image.url}}" alt="event thumb">
+                  <div class="card-date">{{single_event.event_date_time}}</div>
+                </div>
+                <div class="card-body">
+                  <!-- location -->
+                  <p><i class="ti-location-pin text-primary mr-2"></i>{{single_event.event_location}}</p>
+                  <a href="{% url 'event_single' single_event.id %}"><h4 class="card-title">{{single_event.event_title}}</h4></a>
+                </div>
+              </div>
+            </div>
+          {%endif%}
+        {%endfor%}
+      {%else%}
+      <p>event is not available, soon it will come...</p>
+      {%endif%}
+      <!-- event -->
+    </div>
+  </div>
+</section>
+<!-- /more event -->
+
+
+{% endblock %}
+
+{% block extra_js%}
+
+  {% endblock %}

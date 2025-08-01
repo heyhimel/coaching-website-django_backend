@@ -1,0 +1,104 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}Meet Our Expert Teachers | EduSpring AAC Academic & Admission Prgram{% endblock %}
+
+{% block extra_meta%}
+<meta name="description" content="Learn from EduSpring AAC's experienced SSC, HSC & university admission coaching teachers. Expert faculty for Science, Humanities, Commerce & admission preparation.">
+<meta name="keyword" content = "experienced teachers for medical admission coaching, engineering admission, and public university preparation.">
+<link rel="canonical" href="https://eduspringaac.com/all_teachers">
+{%endblock%}
+
+{% block extra_css %}
+<style>
+  .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+</style>
+{% endblock%}
+
+
+{% block mainbody %}
+
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+  <div class="hero-banner">
+    <div class="container">
+      <div class="row w-100">
+        <div class="col-md-8">
+          <ul class="list-inline custom-breadcrumb">
+            <li class="list-inline-item">
+              <a class="h2 text-primary font-secondary" href="{% url 'teacher_page' %}">Our Teachers</a>
+            </li>
+          </ul>
+          <p class="text-white">{{ banner.banner_content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- teachers -->
+<section class="section">
+  <div data-ref="mixitup-target" class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- teacher category list -->
+        <ul class="list-inline text-center filter-controls mb-5">
+          {% for label,value in all_groups %}
+            <li class="list-inline-item m-3 " data-filter=".{{ label }}">{{ value }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <!-- teacher list -->
+    <div class="row" data-ref="mixitup-container">
+      
+      {%if teachers%}
+        {%for teacher in teachers%}
+          <!-- teacher -->
+          <div data-ref="mixitup-target" class="col-lg-4 col-sm-6 mb-5 {{teacher.teacher_group}} law">
+            <div class="card border-0 rounded-0 hover-shadow">
+              {%if teacher%}
+                <img class="card-img-top rounded-0" src="{{teacher.teacher_image.url}}" alt="admission | academic| university | teacher image not found">
+              {%endif%}
+              <div class="card-body">
+                  <a href="{% url 'single_teacher' teacher.id%}">
+                    <h4 class="card-title">{{teacher.teacher_name}}</h4>
+                  </a>
+                  <p>{{teacher.teacher_university_subject}}</p>
+                  <p>Taking class in {{teacher.teacher_group}} group</p>
+                  <ul class="list-inline">
+                    <li class="list-inline-item"><a class="text-color" href="{{teacher.teacher_contact_facebook}}"><i class="ti-facebook"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="callto:{{teacher.teacher_contact_mobile}}"><i class="ti-mobile"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="mailto:{{teacher.teacher_contact_email}}"><i class="ti-email"></i></a></li>
+                    <li class="list-inline-item"><a class="text-color" href="#"><i class="ti-linkedin"></i></a></li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+        {%endfor%}
+      {%else%}
+      <p>our teacher section is coming asap</p>
+      {%endif%}
+      
+    </div>
+  </div>
+</section>
+<!-- /teachers -->
+{% endblock %}
+
+
+{% block extra_js%}
+
+{% endblock %}

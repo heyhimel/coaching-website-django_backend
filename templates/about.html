@@ -1,0 +1,211 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}About EduSpring AAC – Trusted SSC, HSC & university Admission Coaching in Bangladesh {% endblock %}
+  {% block extra_meta %}
+  <meta name="description" content="Learn about EduSpring Academic and Admission Care: our mission, expert teachers, and proven success helping students excel in SSC, HSC & university admission exams in Bangladesh.">
+  <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC coaching, HSC coaching">
+  <link rel="canonical" href="https://eduspringaac.com/about_us">
+  {% endblock%}
+  
+  {% block extra_css %}
+  <style>
+    .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+  </style>
+
+  {% endblock%}
+
+{% block mainbody %}
+
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'about_page' %}">About Us</a></li>
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- about -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center">
+          {% if about_details %}
+          <img class="img-fluid w-100 mb-4" src="{{about_details.image_about_page.url}}" alt="about image">
+          {%endif%}
+        </div>
+        <h2 class="section-title">ABOUT OUR JOURNY</h2>
+        <h3 class="section-title">{{about_details.title_about_page}}</h3>
+        <p>
+          {{about_details.short_content_about_page}}
+        </p>
+        <!-- Hidden details paragraph -->
+          <div id="extraContent" style="display: none;">
+            <p>{{about_details.details_content_about_page}}</p>
+          </div>
+          
+          <!-- See more / See less button -->
+          <a href="javascript:void(0);" id="toggleButton" class="btn btn-sm btn-primary mt-2">See more</a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /about -->
+
+<!-- funfacts -->
+<section class="section-sm bg-primary">
+  <div class="container">
+    <div class="row">
+      <!-- funfacts item -->
+      <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+        <div class="text-center">
+          <h2 class="count text-white" data-count="20">0</h2>
+          <h5 class="text-white">TEACHERS</h5>
+        </div>
+      </div>
+      <!-- funfacts item -->
+      <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+        <div class="text-center">
+          <h2 class="count text-white" data-count="10">0</h2>
+          <h5 class="text-white">COURSES</h5>
+        </div>
+      </div>
+      <!-- funfacts item -->
+      <div class="col-md-4 col-sm-6 mb-4 mb-md-0">
+        <div class="text-center">
+          <h2 class="count text-white" data-count="300">0</h2>
+          <h5 class="text-white">STUDENTS</h5>
+        </div>
+      </div>
+      <!-- funfacts item
+      <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+        <div class="text-center">
+          <h2 class="count text-white" data-count="3737">0</h2>
+          <h5 class="text-white">SATISFIED CLIENT</h5>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
+<!-- /funfacts -->
+
+<!-- success story -->
+<section class="section bg-cover" data-background="images/backgrounds/success-story.jpg">
+  <div class="container">
+    <div class="row">
+      {% if story_details %}
+      <div class="col-lg-6 col-sm-4 position-relative success-video">
+        <a class="play-btn venobox" href="{{story_details.story_youtube_video_link}}" data-vbtype="video">
+          <i class="ti-control-play"></i>
+        </a>
+      </div>
+      <div class="col-lg-6 col-sm-8">
+        <div class="bg-white p-5">
+          <h2 class="section-title">Our Story</h2>
+          <p>
+          {{story_details.story_short_content}}
+          </p>
+        <!-- Hidden details paragraph -->
+          <div id="extraContent1" style="display: none;">
+            <p>{{story_details.story_details_content}}</p>
+          </div>
+          
+          <!-- See more / See less button -->
+          <a href="javascript:void(0);" id="toggleButton1" class="btn btn-sm btn-primary mt-2">See more</a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<!-- /success story -->
+
+<!-- Management team -->
+<section class="section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h2 class="section-title">Meet Our Leadership Team</h2>
+        </div>
+        <!-- team members -->
+        {%if leaders%}
+          {% for leader in leaders %}
+            <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+              <div class="card border-0 rounded-0 hover-shadow">
+                <img class="card-img-top rounded-0" src="{{leader.image.url}}" alt="no image found">
+                <div class="card-body">
+                  <a href="{% url 'single_leader' leader.id %}">
+                    <h4 class="card-title">{{leader.name}}</h4>
+                  </a>
+                  <div class="d-flex justify-content-between">
+                    <h6 style="color: rgb(55, 150, 31);">{{leader.designation}}</h6>
+                  </div>
+                </div>
+                <p class="card-text mb-4 line-clamp">{{leader.short_message}}</p>
+                <a href="{% url 'single_leader' leader.id %}" class="btn btn-primary btn-sm">See More</a>
+              </div>
+            </div>
+          {%endfor%}
+        {%endif%}
+      </div>
+    </div>
+  </section>
+  <!-- /teachers -->
+
+{% endblock %}
+
+{% block extra_js%}
+  <script>
+  document.addEventListener("DOMContentLoaded", function(){
+    var toggleButton = document.getElementById("toggleButton");
+    var extraContent = document.getElementById("extraContent");
+
+    toggleButton.addEventListener("click", function(){
+      if (extraContent.style.display === "none") {
+        extraContent.style.display = "block";
+        toggleButton.innerText = "See less";
+      } else {
+        extraContent.style.display = "none";
+        toggleButton.innerText = "See more";
+      }
+    });
+  });
+
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var toggleButton = document.getElementById("toggleButton1");
+    var extraContent = document.getElementById("extraContent1");
+
+    toggleButton.addEventListener("click", function(){
+      if (extraContent.style.display === "none") {
+        extraContent.style.display = "block";
+        toggleButton.innerText = "See less";
+      } else {
+        extraContent.style.display = "none";
+        toggleButton.innerText = "See more";
+      }
+    });
+  });
+  </script>
+{% endblock %}

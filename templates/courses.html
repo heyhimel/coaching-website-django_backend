@@ -1,0 +1,91 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+{% block title %}Our Programs – SSC, HSC & University Admission Coaching | EduSpring AAC{% endblock %}
+{% block extra_meta %}
+  <meta name="description" content="Explore EduSpring AAC programs: expert coaching for SSC, HSC (Science, Humanities, Commerce), and admission prep for medical & engineering universities in Bangladesh.">
+  <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC coaching, HSC coaching">
+  <link rel="canonical" href="https://eduspringaac.com/all_programs">
+{% endblock%}
+
+{% block extra_css %}
+<style>
+  .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+</style>
+{% endblock%}
+
+
+{% block mainbody %}
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item">
+            <a class="h2 text-primary font-secondary" href="{% url 'programs_page' %}">Our Courses</a>
+          </li>
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- courses -->
+<section class="section">
+  <div class="container">
+
+    <!-- course list -->
+    <div class="row justify-content-center">
+      {% if courses %}
+      <!-- course item -->
+        {%for course in courses%}
+        <div class="col-lg-4 col-sm-6 mb-5">
+          <div class="card p-0 border-primary rounded-0 hover-shadow">
+            {%if course.course_image%}
+              <img class="card-img-top rounded-0" src="{{course.course_image.url}}" alt="University Admission | HSC SSC Acdemic | Science Humanities Commerce Academic image not found">
+            {%endif%}
+            <!-- <img class="card-img-top rounded-0" src="{{course.course_image.url}}" alt="course thumb"> -->
+            <div class="card-body">
+              <ul class="list-inline mb-2">
+                <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>{{course.course_start_at}}</li>
+                <li class="list-inline-item"><a class="text-color" href="{% url 'single_program' course.id %}">{{course.course_under_group}}</a></li>
+              </ul>
+              <a href="{% url 'single_program' course.id %}">
+                <h4 class="card-title">{{course.course_name_title}}</h4>
+              </a>
+              <p class="card-text mb-4 line-clamp"> {{course.about_course}}</p>
+              <a href="{%url 'course_registration_page'%}" class="btn btn-primary btn-sm">Apply now</a>
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      {%else%}
+      <p>course is coming</p>
+      {%endif%}
+      
+    </div>
+</div>
+</section>
+<!-- /courses -->
+{% endblock %}
+
+
+{% block extra_js%}
+
+{% endblock %}

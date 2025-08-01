@@ -1,0 +1,79 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Latest Notices & Updates | EduSpring AAC Coaching Bangladesh {% endblock %}
+
+  {% block extra_meta %}
+  <meta name="description" content="Stay updated with EduSpring AAC's latest notices, class schedules, exam updates & announcements for SSC, HSC & university admission coaching programs in Bangladesh.">
+  <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC academic coaching, HSC academic coaching">
+  <link rel="canonical" href="https://eduspringaac.com/all_notices">
+  {% endblock%}
+  
+  {% block extra_css %}
+  <style>
+    .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+  </style>
+  {% endblock%}
+
+{% block mainbody %}
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'notice_page' %}">All Notices</a></li>
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- notice -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <ul class="list-unstyled">
+          {%if notices%}
+            {%for notice in notices%}
+              <!-- notice item -->
+              <li class="d-md-table mb-4 w-100 border-bottom hover-shadow">
+                <div class="d-md-table-cell text-center p-4 bg-primary text-white mb-4 mb-md-0"><h4>{{notice.published_date}}</h4></div>
+                <div class="d-md-table-cell px-4 vertical-align-middle mb-4 mb-md-0">
+                  <a href="{% url 'notice_single' notice.id%}" class="h4 mb-3 d-block">{{notice.notice_title}}</a>
+                  <p class="mb-0 line-clamp">{{notice.notice_details}}</p>
+                </div>
+                <div class="d-md-table-cell text-right pr-0 pr-md-4"><a href="{% url 'notice_single' notice.id%}" class="btn btn-primary">read more</a></div>
+              </li>
+            {%endfor%}
+          {%else%}
+          <div class="mt-5">The latest notice will be published here. Keep eyes on.</div>
+          {%endif%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /notice -->
+
+{% endblock %}
+
+{% block extra_js%}
+
+{% endblock %}

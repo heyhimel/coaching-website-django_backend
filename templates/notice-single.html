@@ -1,0 +1,91 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Latest Notices & Updates | EduSpring AAC Coaching Bangladesh{% endblock %}
+  {% block extra_meta %}
+  <meta name="description" content="Stay updated with EduSpring AAC's latest notices, class schedules, exam updates & announcements for SSC, HSC & university admission coaching programs in Bangladesh.">
+  <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC academic coaching, HSC academic coaching">
+  <link rel="canonical" href="https://eduspringaac.com/all_notices">
+  {% endblock%}
+  
+  {% block extra_css %}
+  <style>
+      .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+</style>
+  {% endblock%}
+
+{% block mainbody %}
+<!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'notice_page' %}">Notice</a></li>
+          {% if notice %}
+          <li class="list-inline-item text-white h3 font-secondary nasted">{{notice.notice_title}}</li>
+          {%endif%}
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- notice details -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      {%if notice%}
+      <div class="col-12">
+        <div class="d-flex">
+          <div class="text-center mr-4">
+            <div class="p-4 bg-primary text-white">
+                <span class="h2 d-block">{{ notice.published_date|date:"d" }}</span>
+                {{ notice.published_date|date:"M" | upper }},{{ notice.published_date|date:"Y" }}
+                at {{ notice.published_date|date:"h:i A" }}
+            </div>
+          </div>
+          <!-- notice content -->
+          <div>
+            <h3 class="mb-4">{{notice.notice_title}}</h3>
+            <p>{{notice.notice_details}}</p>
+            <ul class="list-styled mb-5">
+              {%for text in notice_bullet_text%} 
+              <li>{{text}}</li>
+              {%endfor%}
+            </ul>
+            {% if notice.notice_file %}
+              <p>{{ notice.notice_file.name }}</p>
+              <a href="{{ notice.notice_file.url }}" class="btn btn-primary" download>Download</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {%endif%}
+    </div>
+  </div>
+</section>
+<!-- /notice details -->
+
+
+{% endblock %}
+
+{% block extra_js%}
+
+{% endblock %}

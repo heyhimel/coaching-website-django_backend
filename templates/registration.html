@@ -1,0 +1,123 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Registration – Apply for SSC, HSC & academic University Admission Coaching | EduSpring AAC{% endblock %}
+  {%block extra_meta%}
+  <meta name="description" content="Register online for EduSpring AAC's SSC, HSC and university admission coaching programs. Quick and easy application to join our expert-led classes.">
+  <meta name="keywords" content="Academic Registration, University Admission registration, HSC, SSC program Registration, Event Registration">
+  <link rel="canonical" href="https://eduspringaac.com/register_a_programm_or_event">
+  {%endblock%}
+  {% block extra_css %}
+  <style>
+    .flash-messages {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+.flash-message {
+  background-color: #4BB543; /* green success color */
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: fadeInOut 4s forwards;
+  font-size: 15px;
+}
+
+/* Animation to fade in and out */
+@keyframes fadeInOut {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+      .font-size {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Small devices (phones, ≤ 480px) */
+    @media (max-width: 480px) {
+      .font-size {
+        font-size: 1.1rem;
+      }
+    }
+  </style>
+  {% endblock%}
+
+{% block mainbody %}
+<section class="page-title-section">
+  <!-- if message saved this will show -->
+    {% if messages %}
+        <div id="flash-messages" class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-message">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+    {% endif %}
+    <div class="col-lg-8 mx-auto mb-4">
+      <div class="mb-4">
+        <h2 class="font-size">Registration Form</h2>
+      </div>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Student Name" required>
+        <input type="text" class="form-control mb-3" id="father_name" name="father_name" placeholder="Father's Name" required>
+        <input type="text" class="form-control mb-3" id="village" name="village" placeholder="Address" required>
+        <input type="text" class="form-control mb-3" id="school_name" name="school_name" placeholder="School or College Name" required>
+        <input type="text" class="form-control mb-3" id="result" name="result" placeholder="Result, example: SSC-4.83, HSC-5.00" required>
+        
+        <select class="form-control mb-3" id="group" name="group" required>
+        <option value="" disabled selected>Select Group/Section</option>
+        <option value="humanities">Humanities</option>
+        <option value="science">Science</option>
+        <option value="commerce">Commerce</option>
+        </select>
+        <select class="form-control mb-3" id="group" name="registerd_event_course" required>
+        <option value="" disabled selected>Select Course/Program/Event</option>
+        {% if courses %}
+          {%for course in courses%}
+            <option value="{{course.course_name_title}}">Course: {{course.course_name_title}}</option>
+          {%endfor%}
+        {%endif%}
+        {% if events %}
+          {%for event in events%}
+            <option value="{{event.event_title}}">Event: {{event.event_title}}</option>
+          {%endfor%}
+        {%endif%}
+        </select>
+        
+        <input type="tel" class="form-control mb-3" id="student_mobile" name="student_mobile" placeholder="Mobile (Student) 01XXXXXXXXX" pattern="01[0-9]{9}" maxlength="11" required>
+        
+        <input type="tel" class="form-control mb-3" id="guardian_mobile" name="guardian_mobile" placeholder="Mobile (Guardian) 01XXXXXXXXX" pattern="01[0-9]{9}" maxlength="11" required>
+        
+        <div class="mb-3">
+        <label for="photo" class="form-label">Upload Photo</label>
+        <input type="file" class="form-control" id="photo" name="photo" accept="image/*" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js%}
+<script>
+  setTimeout(function() {
+    var messages = document.getElementById('flash-messages');
+    if (messages) {
+      messages.remove();
+    }
+  }, 5000); // match animation time (4 seconds)
+</script>
+{% endblock %}

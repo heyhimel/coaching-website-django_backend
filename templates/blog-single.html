@@ -1,0 +1,210 @@
+{% extends 'base_template.html' %}
+{% load static %}
+
+  {% block title %}Success Stories & Tips – EduSpring academic and admission Coaching Blog Bangladesh{% endblock %}
+  {% block extra_meta %}
+  <meta name="description" content="Read real success stories of SSC, HSC & university admission students at EduSpring AAC. Get study tips, coaching updates, and inspiration from Bangladesh's top coaching center.">
+  <meta name="keywords" content="EduSpring Academic and Admission Care, University admission coaching, SSC coaching, HSC coaching, Blog success story">
+  <link rel="canonical" href="https://eduspringaac.com/all_blog">
+  {% endblock%}
+  
+  {% block extra_css %}
+  <style>
+      .hero-banner {
+  background-image: url('{{banner.banner_image.url}}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 500px;
+}
+
+.responsive-thumb {
+    max-width: 100%;          /* ensures it never exceeds container width */
+    height: auto;            /* keeps aspect ratio */
+    object-fit: contain;     /* ensures the whole image is visible */
+    display: block;
+    margin: 0 auto;          /* center the image horizontally */
+    
+    /* Optional: add min dimensions if image is very small */
+    min-width: 200px;        /* adjust based on design */
+    min-height: 150px;
+    }
+
+    .teacher-thumb {
+  width: 60px;            /* adjust size as needed: 40px, 50px, 60px, etc. */
+  height: 60px;
+  object-fit: cover;     /* ensures the image fills the box and keeps aspect ratio */
+  border-radius: 50%;    /* makes it circular (optional, looks nice for profiles) */
+}
+
+.flash-messages {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
+
+.flash-message {
+  background-color: #4BB543; /* green success color */
+  color: white;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  animation: fadeInOut 4s forwards;
+  font-size: 15px;
+}
+
+/* Animation to fade in and out */
+@keyframes fadeInOut {
+  0%   { opacity: 0; transform: translateY(-10px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10px); }
+}
+</style>
+  {% endblock%}
+
+{% block mainbody %}
+
+ <!-- page title -->
+{% if banner %}
+<section class="custom-top-space">
+<div class="hero-banner">
+  <div class="container">
+    <div class="row w-100">
+      <div class="col-md-8">
+        <ul class="list-inline custom-breadcrumb">
+          <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="{% url 'blog_page' %}">Our Story</a></li>
+          {% if blog %}
+          <li class="list-inline-item text-white h3 font-secondary nasted">{{blog.blog_title}}</li>
+          {%endif%}
+        </ul>
+        <p class="text-white">{{ banner.banner_content }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{%else%}
+<div>banner image not found. image coming..</div>
+{%endif%}
+<!-- /page title -->
+
+<!-- blog details -->
+<section class="section-sm bg-gray">
+  {% if blog %}
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mb-4 text-center">
+        <img src="{{blog.blog_image.url}}" alt="blog-thumb" class="img-fluid responsive-thumb">
+      </div>
+      <div class="col-12">
+        <ul class="list-inline">
+          <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light"><span class="font-weight-bold mr-2">Post:</span>{{blog.blog_posted_by}}</li>
+          <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">{{blog.published_date}}</li>
+          <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light"><i class="ti-book mr-2"></i>Read 289</li>
+          <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light"><i class="ti-share mr-2"></i>289</li>
+          <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light"><a class="text-light" href="#"><i class="ti-comments mr-2"></i>265</a></li>
+        </ul>
+      </div>
+      <!-- border -->
+      <div class="col-12 mt-4">
+        <div class="border-bottom border-primary"></div>
+      </div>
+      <!-- blog contect -->
+      <div class="col-12 mb-5">
+        <h2>{{blog.blog_title}}</h2>
+        <p>{{blog.blog_details}}</p>
+      </div>
+      <!-- comment box -->
+      {% if messages %}
+        <div id="flash-messages" class="flash-messages">
+          {% for message in messages %}
+            <div class="flash-message">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <div class="col-12">
+        <form action="" class="row" method="POST">
+          {% csrf_token %}
+          <div class="col-sm-6">
+            <input type="text" class="form-control mb-4" id="name" name="name" placeholder="Full Name" required>
+          </div>
+          <div class="col-sm-6">
+            <!-- <input type="email" class="form-control mb-4" id="mail" name="mail" placeholder="mobile"> -->
+            <input type="tel" class="form-control mb-4" id="mail" name="mobile" 
+              placeholder="Enter Mobile 01XXXXXXXXX" pattern="01[0-9]{9}" maxlength="11" required>
+          </div>
+          <div class="col-12">
+            <textarea name="comment" id="comment" class="form-control mb-4" placeholder="Comment Here..." required></textarea>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">post comment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  {%endif%}
+</section>
+<!-- /blog details -->
+
+<!-- recommended post -->
+<section class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">Recommended</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+  <!-- blog post -->
+  {%if blogs%}
+    {%for single_blog in blogs%}
+      {%if blog.id != single_blog.id%}
+        <article class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
+          <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+            <img class="card-img-top rounded-0" src="{{single_blog.blog_image.url}}" alt="Post thumb">
+            <div class="card-body">
+              <!-- post meta -->
+              <ul class="list-inline mb-3">
+                <!-- post date -->
+                <li class="list-inline-item mr-3 ml-0">August 28, 2019</li>
+                <!-- author -->
+                <li class="list-inline-item mr-3 ml-0">By {{single_blog.blog_posted_by}}</li>
+              </ul>
+              <a href="{% url 'blog_single' single_blog.id%}">
+                <h4 class="card-title">{{single_blog.blog_title}}</h4>
+              </a>
+              <p class="card-text line-clamp">{{single_blog.blog_details}}</p>
+              <a href="{% url 'blog_single' single_blog.id%}" class="btn btn-primary btn-sm">read more</a>
+            </div>
+          </div>
+        </article>
+      {%endif%}
+    {%endfor%}
+  {%endif%}
+  
+</div>
+  </div>
+</section>
+<!-- /recommended post -->
+
+{% endblock %}
+
+{% block extra_js%}
+<script>
+  setTimeout(function() {
+    var messages = document.getElementById('flash-messages');
+    if (messages) {
+      messages.remove();
+    }
+  }, 5000); // match animation time (4 seconds)
+</script>
+{% endblock %}
