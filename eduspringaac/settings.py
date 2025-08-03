@@ -129,6 +129,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / 'staticfiles' # for nginx: to collect all static files here and serve from here.
 
 # For media file like Image
 MEDIA_ROOT = BASE_DIR / "media/"
