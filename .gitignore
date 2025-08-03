@@ -1,0 +1,12 @@
+# ignore environment variables
+.env
+
+# .pyc file
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# keep media folder ignore internal folder
+media/*
+!media/.gitkeep

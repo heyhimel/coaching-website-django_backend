@@ -14,7 +14,7 @@ class notice_banner(models.Model):
 class notice_details(models.Model):
     notice_title = models.CharField(max_length=100)
     notice_details = models.TextField(null=True,blank=True)
-    notice_bullet_point = models.TextField(null=True,blank=True)
+    notice_bullet_point = models.TextField(null=True,blank=True,help_text="Write line by line")
     notice_file = models.FileField(upload_to='notice_documents/',null=True,blank=True,help_text="Provide image or pdf file that the user can download.")
     published_date = models.DateTimeField()
 
